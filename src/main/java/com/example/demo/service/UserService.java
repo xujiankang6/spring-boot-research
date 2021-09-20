@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,5 +28,23 @@ public interface UserService {
     int updateByPrimaryKey(User record);
 
 
+    /**
+     * 基于注解返回结果
+     *
+     * @return
+     */
     List<User> selectUser();
+
+
+    /**
+     * 实现分页第二种方式
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    List<User> selectByPageNumSize(
+            int pageNum,
+            int pageSize);
+
+
 }

@@ -3,6 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.mapper.TestMapper;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import com.example.demo.util.VerifyUtils;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,20 +31,52 @@ public class UserMapperController {
     private UserService userService;
 
 
+    @Autowired
+    private VerifyUtils verifyUtils;
 
 
     @RequestMapping("/getuser/{uid}")
     @ResponseBody
-    public User getUser(@PathVariable String uid){
+    public User getUser(@PathVariable String uid) {
         return userService.selectByPrimaryKey(Integer.valueOf(uid));
     }
 
 
-
+    /**
+     * 实现分页第一种方式
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("all")
     @ResponseBody
-    public List<User> getAllUser(){
-        return userService.selectUser();
+    public PageInfo<User> getAllUser(@Param("pageNum") String pageNum, @Param("pageSize") String pageSize) {
+        if (!verifyUtils.isNumber(pageNum)) {
+            pageNum = "1";
+        }
+        if (!verifyUtils.isNumber(pageSize)) {
+            pageSize = "10";
+        }
+        PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+        List<User> users = userService.selectUser();
+        PageInfo<User> userPageInfo = new PageInfo<>(users);
+        return userPageInfo;
     }
+
+
+    @RequestMapping("all2")
+    @ResponseBody
+    public PageInfo<User> getAllUser2(@Param("pageNum") String pageNum, @Param("pageSize") String pageSize) {
+        if (!verifyUtils.isNumber(pageNum)) {
+            pageNum = "1";
+        }
+        if (!verifyUtils.isNumber(pageSize)) {
+            pageSize = "10";
+        }
+        List<User> users = userService.selectByPageNumSize(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        PageInfo<User> userPageInfo = new PageInfo<>(users);
+        return userPageInfo;
+    }
+
 
 }

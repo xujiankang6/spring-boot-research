@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
     public List<User> selectUser() {
         return testMapper.selectUser();
     }
+
+    @Override
+    public List<User> selectByPageNumSize(int pageNum, int pageSize) {
+        return testMapper.selectByPageNumSize(pageNum,pageSize);
+    }
 }
