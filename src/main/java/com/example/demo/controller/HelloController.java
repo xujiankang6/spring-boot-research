@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Resource;
+import com.example.demo.config.ResourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 /**
  * UserController
@@ -18,14 +20,18 @@ public class HelloController {
 
 
     @Autowired
-    private Resource resource;
+    private ResourceConfig resourceConfig;
 
     @RequestMapping("/resource")
     @ResponseBody
-    public String getA()
+    public HashMap getA()
     {
-        return resource.getLanguage()+resource.getName()+resource.getPhone();
+        HashMap map = new HashMap();
+        map.put("com.name", resourceConfig.getName());
+        map.put("com.phone", resourceConfig.getPhone());
+        map.put("com.language", resourceConfig.getLanguage());
+        map.put("com.address", resourceConfig.getAddress());
+        return map;
     }
-
 
 }

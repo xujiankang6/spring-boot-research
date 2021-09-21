@@ -1,5 +1,6 @@
-package com.example.demo.model;
+package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -13,12 +14,20 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ConfigurationProperties(prefix = "com")
 @PropertySource(value="classpath:resource.properties")
-public class Resource {
+public class ResourceConfig {
+
+
+    @Value("${name:jiankang}")
     private String name;
 
+    @Value("${phone:111}")
     private String phone;
 
+    @Value("${language:python}")
     private String language;
+
+    @Value("${address:chinese}")
+    private String address;
 
 
     public String getName() {
@@ -43,5 +52,9 @@ public class Resource {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
