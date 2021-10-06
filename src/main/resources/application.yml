@@ -30,6 +30,22 @@ spring:
     initialization-mode: always
 #    separator: $$$
 
+
+clickhouse:
+  ip: 192.168.174.128
+  httpUrl: http://${clickhouse.ip}:8123
+  datasource:
+    jdbcUrl: jdbc:clickhouse://${clickhouse.ip}:8123?tcp_keep_alive=true
+    driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+    minimumIdle: 10
+    maximumPoolSize: 100
+    idleTimeout: 30000
+    maxLifetime: 600000
+
+
+
+
+
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径

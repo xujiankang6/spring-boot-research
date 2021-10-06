@@ -1,4 +1,4 @@
- insert into `user`(uname,upwd) VALUES('test','password')
+insert into `user`(uname,upwd) VALUES('test','password')
 insert into `user`(uname,upwd) VALUES('test','password')
 insert into `user`(uname,upwd) VALUES('test','password')
 insert into `user`(uname,upwd) VALUES('test','password')
