@@ -1,7 +1,11 @@
 package com.example.demo.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
